@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+  software-db-enterprise-com:
+    image: ${DOCKER_REGISTRY}dsa/software-db.enterprise.com:${BRANCH:-develop}.${VERSION:-local}
+    container_name: software-db-local.enterprise.com
+    build:
+      context: .
+      dockerfile: Dockerfile

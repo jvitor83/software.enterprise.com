@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:  
+  software-db-enterprise-com:
+    image: ${DOCKER_REGISTRY}software-db.enterprise.com:${BRANCH:-develop}.${VERSION:-local}-deploy
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deploy
+    environment:
+      #----Kubernetes----
+      DEPLOY_KUBERNETES: ${DEPLOY_KUBERNETES:-false} #Indica se irá rodar o script que publica os yaml no Kubernetes (kubectl apply) 
+      DESTROY_KUBERNETES_ENVIRONMENT: ${DESTROY_KUBERNETES_ENVIRONMENT:-false} #Indica se irá rodar o script que deleta os yaml no Kubernetes (kubectl delete)
+      KUBERNETES_FOLDER: ${KUBERNETES_FOLDER:-/var/release/source} #Caminho dos arquivos yaml para publicação
+      KUBECONFIG_PATH: ${KUBECONFIG_PATH:-/var/release/source/kubeconfig} #Caminho do kubeconfig para publicação
+      #----Kompose----
+      #Caso o Kompose precise de outras variaveis de ambiente, deve ser passado aqui.
+      COMPOSE_PATH: ${COMPOSE_PATH} #Caso deseja utilizar Kompose para converter yml em yaml, informar o caminho completo do docker-compose a ser transformado.
+      DOCKER_REGISTRY: ${DOCKER_REGISTRY}
+      BRANCH: ${BRANCH:-develop}
+      VERSION: ${VERSION:-local}

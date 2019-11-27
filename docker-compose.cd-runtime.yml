@@ -1,0 +1,7 @@
+version: '3.5'
+
+services:
+  software-db-enterprise-com:
+    image: ${DOCKER_REGISTRY}software-db.enterprise.com:${BRANCH}.${VERSION}
+    build:
+      target: runtime

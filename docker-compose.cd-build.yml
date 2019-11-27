@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  software-db-enterprise-com:
+    image: ${DOCKER_REGISTRY}software-db.enterprise.com:${BRANCH}.${VERSION}-build
+    build:
+      target: build
+      args:
+        VERSION: ${VERSION}
+        BRANCH: ${BRANCH}
+    volumes:
+      - app:/var/release/
+
+volumes:
+  app:
+    name: ${DOCKERCOMPOSE_PUBLISH_VOLUME_NAME:-app-extract-app}

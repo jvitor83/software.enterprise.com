@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  software-db-enterprise-com:
+    build:
+      target: build
+    ports:
+      - 5432:5432
+    environment:
+      RUN_TEST: ${RUN_TEST:-false}
+      RUN_PROJECT: ${RUN_PROJECT:-true}
